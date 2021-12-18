@@ -62,7 +62,7 @@
                 '.undefined.null.null.null.Id.VIEW.true.null.ContentUrl%2CExternalDataSourceName%2CParentId%2CLastModifiedDate%2CIsAssetEnabled%2CCreatedBy%3B2LastModifiedById%2CTitle%2CContentSize%2CCreatedBy%3B2CreatedDate%2CCreatedBy%3B2Id%2CRecordType%2CExternalDataSourceType%2CCreatedBy%3B2LastModifiedDate%2CFileType%2CCreatedBy%3B2SystemModstamp%2CFileExtension%2CCreatedBy%3B2Name%2CCreatedDate%2CId%2CLastModifiedById%2CCreatedById.null%22%7D%7D%2C%7B%22id%22%3A%222721%3Ba%22%2C%22descriptor%22%3A%22serviceComponent%3A%2F%2Fui.force.components.controllers.recordGlobalValueProvider.RecordGvpController%2FACTION%24deleteRecord%22%2C%22callingDescriptor%22%3A%22UNKNOWN%22%2C%22params%22%3A%7B%22recordId%22%3A%22' +
                 id +
                 '%22%7D%7D%5D%7D&aura.context=%7B%22mode%22%3A%22PROD%22%2C%22fwuid%22%3A%227FPkrq_-upw5gdD4giTZpg%22%2C%22app%22%3A%22one%3Aone%22%2C%22loaded%22%3A%7B%22APPLICATION%40markup%3A%2F%2Fone%3Aone%22%3A%22B6g-nHwJlr4SfU5_IGg6Ug%22%7D%2C%22dn%22%3A%5B%5D%2C%22globals%22%3A%7B%22density%22%3A%22VIEW_ONE%22%2C%22appContextId%22%3A%22'+appContextId+'%22%7D%2C%22uad%22%3Atrue%7D&aura.pageURI=%2F' +
-                encodeURI(location.pathname) +
+                location.pathname +
                 '&aura.token=' +
                 encodeURI (window.Aura.initConfig.token),
               method: 'POST',
