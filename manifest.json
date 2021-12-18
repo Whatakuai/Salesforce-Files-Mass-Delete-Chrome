@@ -1,0 +1,30 @@
+{
+    "name": "Salesforce Files Mass Delete",
+    "description": "Delete all ContentDocuments from the related Files page of a record with just one click.",
+    "version": "0.0.1",
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [
+        {
+          "matches": ["https://*.lightning.force.com/*"],
+          "js": ["button.js"],
+          "all_frames": true
+        }
+      ],
+      "permissions": [
+        "tabs"
+      ],
+      "web_accessible_resources": [
+        {
+            "resources": [ "button.js","mysrc.js"],
+            "matches": [ "https://*.force.com/*" ]
+        }
+      ],
+      "icons": { "16": "icon16.png",
+        "32": "icon32.png",
+        "48": "icon48.png",
+       "128": "icon128.png" },
+    "manifest_version": 3
+  }
+  
