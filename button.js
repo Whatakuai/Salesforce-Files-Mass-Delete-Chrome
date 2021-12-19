@@ -1,32 +1,20 @@
 chrome.runtime.onMessage.addListener ((request, sender, sendResponse) => {
   var intervalId;
   var intfunc = () => {
+    let elem = document.querySelectorAll('.test-lvmForceActionsContainer').length > 0 ? document.querySelectorAll('.test-lvmForceActionsContainer')[document.querySelectorAll('.test-lvmForceActionsContainer').length - 1] : document.querySelectorAll('.forceListViewManagerHeader').length > 0 ? document.querySelectorAll('.forceListViewManagerHeader')[document.querySelectorAll('.forceListViewManagerHeader').length - 1]  : null;
     if (
       document.getElementsByClassName ('custom-mass-delete').length === 0 &&
-      document.getElementsByClassName (
-        'windowViewMode-normal oneContent active'
-      ).length > 0 &&
-      document.getElementsByClassName (
-        'windowViewMode-normal oneContent active'
-      )[0].children.length > 0 &&
-      document.getElementsByClassName (
-        'windowViewMode-normal oneContent active'
-      )[0].children[0].children.length > 0 &&
-      document.getElementsByClassName (
-        'windowViewMode-normal oneContent active'
-      )[0].children[0].children[0].children.length > 0
+      elem
     ) {
       var btn = document.createElement ('li');
       btn.classList = 'slds-button slds-button--neutral custom-mass-delete';
       btn.innerText = 'Mass Delete';
       btn.style = 'z-index: 99999;float:right';
       btn.addEventListener ('click', this.deleteRecords);
-      document
-        .getElementsByClassName ('windowViewMode-normal oneContent active')[0]
-        .children[0].children[0].children[0].prepend (btn);
+      elem.prepend (btn);
       clearInterval (intervalId);
     } else if (
-      document.getElementsByClassName ('custom-mass-delete').length > 0
+      document.getElementsByClassName ('custom-mass-delete').length > 0 
     ) {
       clearInterval (intervalId);
     }
