@@ -41,9 +41,9 @@
     appContextId = ''
   }
   await Promise.all (
-    Array.from (document.querySelectorAll ('a')).map (async elem => {
-      if (elem.href.match ('ContentDocument/[a-z|A-Z|0-9]{18}/view')) {
-        let id = elem.href.split ('/')[6];
+    Array.from (document.querySelectorAll ('.custom-delete-checkbox')).map (async elem => {
+      if (elem.checked == true) {
+        let id = elem.dataset.id
         try {
           let respt = await fetch (
             'https://' +
