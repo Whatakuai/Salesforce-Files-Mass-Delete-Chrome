@@ -1,7 +1,7 @@
 {
     "name": "Salesforce Files Mass Delete",
-    "description": "Delete all ContentDocuments from the related Files page of a record with just one click.",
-    "version": "0.0.3",
+    "description": "Delete ContentDocuments from the related Files page of a record with just two clicks.",
+    "version": "0.0.4",
     "background": {
         "service_worker": "background.js"
     },
