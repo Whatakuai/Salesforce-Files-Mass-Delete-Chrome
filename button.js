@@ -48,7 +48,6 @@ chrome.runtime.onMessage.addListener ((request, sender, sendResponse) => {
 });
 
 var showPrompt = () => {
-
   let elements = '<table>';
   document.querySelectorAll ('a.forceContentCompoundFieldsTitleRenderer').forEach (elem => {
     if (elem.href.match ('ContentDocument/[a-z|A-Z|0-9]{18}/view')) {
@@ -76,7 +75,8 @@ var showPrompt = () => {
         ${elements}
       </div>
       <footer class="slds-modal__footer slds-theme_default">
-        <button class="custom-confirm-delete slds-button slds-button_brand">Delete Selected</button>
+        <button class="custom-confirm-unlink slds-button slds-button_brand" title="Remove Content Document Links. Uses 1 API Call.">Unlink Selected</button>
+        <button class="custom-confirm-delete slds-button slds-button_destructive" title="Remove Content Documents. Does NOT use any API Call">Delete Selected</button>
         <button class="custom-cancel-delete slds-button slds-button_neutral"">Cancel</button>
       </footer>
     </div>
@@ -90,6 +90,7 @@ var showPrompt = () => {
 function addEventListeners(){
   document.querySelector('.custom-cancel-delete').addEventListener('click', cancel );
   document.querySelector('.custom-confirm-delete').addEventListener('click', deleteDocs );
+  document.querySelector('.custom-confirm-unlink').addEventListener('click', unlinkDocs );
   document.querySelector('.custom-delete-check-all').addEventListener('click', checkAll );
 }
 
@@ -98,7 +99,33 @@ var cancel =  () => {
   document.querySelector('.custom-delete-modal').remove();
 }
 
-var deleteDocs = () => { 
+var deleteDocs = () => {
+  this.appendScript()
+}
+
+var unlinkDocs = () => {
+  let selectedContentDocuments = [];
+  document.querySelectorAll('.custom-delete-checkbox').forEach(elem => {
+    if(elem.checked) selectedContentDocuments.push(elem.dataset.id);
+  })
+  let match = location.href.match ('/[A-Z|a-z|0-9]{18}/related/')
+  let linkedEntity = match[0].split('/')[1]
+  chrome.runtime.sendMessage({message: 'getContentDocumentLinks', sfHost: location.href, selectedDocuments: selectedContentDocuments, linkedEntity}, (response) => {
+    if(response && response.records && response.done && response.records.length > 0){
+      document.querySelectorAll('.custom-delete-checkbox').forEach(elem => {
+        response.records.forEach(record => {
+          if(elem.dataset.id === record.ContentDocumentId) elem.dataset.id = record.Id
+        })
+      })
+      this.appendScript()
+    }else{
+      console.log ('Cannot delete content document links');
+      location.reload()
+    }
+  });
+}
+
+function appendScript(){
   var elt = document.createElement ('script');
   elt.src = chrome.runtime.getURL ('mysrc.js');
   document.body.appendChild (elt);
